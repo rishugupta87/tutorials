@@ -1,0 +1,9 @@
+title: "Rishu’s Knowledge Base"
+description: "Python + AI Agents notes and crash courses"
+
+theme: minima
+markdown: kramdown
+
+# IMPORTANT — since you use docs folder
+baseurl: "/tutorials"
+url: "https://rishugupta87.github.io"
