@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Dictionary Crash Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #4a5568;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            position: relative;
+            white-space: pre;
+        }
+        
+        .code-label {
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        
+        .tip {
+            background: #ebf8ff;
+            border-left: 4px solid #4299e1;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .tip strong {
+            color: #2c5282;
+        }
+        
+        .warning {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .warning strong {
+            color: #c05621;
+        }
+        
+        .success {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success strong {
+            color: #22543d;
+        }
+        
+        code {
+            background: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+            font-size: 0.9em;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .practice {
+            background: #faf5ff;
+            border: 2px solid #9f7aea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .practice h4 {
+            color: #6b46c1;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Python Dictionary Crash Course</h1>
+            <div class="subtitle">Master Python's Most Powerful Data Structure</div>
+        </header>
+        
+        <div class="content">
+            <!-- Basics -->
+            <div class="section">
+                <h2>1. The Basics</h2>
+                
+                <p>Dictionaries are Python's hash tables - key-value pairs for fast lookups.</p>
+                
+                <h3>Creating Dictionaries</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Empty dictionary
+empty = {}
+empty = dict()
+
+# With initial values
+person = {
+    'name': 'Alice',
+    'age': 30,
+    'city': 'NYC'
+}
+
+# Using dict() constructor
+person = dict(name='Alice', age=30, city='NYC')
+
+# From two lists
+keys = ['name', 'age', 'city']
+values = ['Bob', 25, 'LA']
+person = dict(zip(keys, values))
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(5)}
+# {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}</div>
+
+                <div class="tip">
+                    <strong>Key Rule:</strong> Keys must be immutable (strings, numbers, tuples). Values can be anything!
+                </div>
+            </div>
+            
+            <!-- Accessing -->
+            <div class="section">
+                <h2>2. Accessing Values</h2>
+                
+                <div class="comparison">
+                    <div>
+                        <h3>Using [ ] brackets</h3>
+                        <div class="code-block">
+<span class="code-label">Python</span>person = {'name': 'Alice', 'age': 30}
+
+# Access
+name = person['name']  # 'Alice'
+
+# Raises KeyError if missing
+city = person['city']  # ❌ KeyError!</div>
+                    </div>
+                    <div>
+                        <h3>Using .get()</h3>
+                        <div class="code-block">
+<span class="code-label">Python</span>person = {'name': 'Alice', 'age': 30}
+
+# Safe access
+name = person.get('name')  # 'Alice'
+
+# Returns None if missing
+city = person.get('city')  # None
+
+# With default
+city = person.get('city', 'Unknown')
+# 'Unknown'</div>
+                    </div>
+                </div>
+                
+                <div class="success">
+                    <strong>Best Practice:</strong> Use <code>.get()</code> when a key might not exist!
+                </div>
+            </div>
+            
+            <!-- Adding/Modifying -->
+            <div class="section">
+                <h2>3. Adding & Modifying</h2>
+                
+                <div class="code-block">
+<span class="code-label">Python</span>person = {'name': 'Alice'}
+
+# Add new key-value
+person['age'] = 30
+person['city'] = 'NYC'
+
+# Modify existing
+person['age'] = 31
+
+# Add if doesn't exist (safer)
+person.setdefault('country', 'USA')  # Adds 'USA'
+person.setdefault('country', 'UK')   # Does nothing, already exists
+
+# Update multiple at once
+person.update({'job': 'Engineer', 'salary': 100000})
+person.update(job='Engineer', salary=100000)  # Same thing
+
+# Merge dictionaries (Python 3.9+)
+defaults = {'theme': 'dark', 'lang': 'en'}
+settings = {'lang': 'es', 'size': 'large'}
+merged = defaults | settings  # {'theme': 'dark', 'lang': 'es', 'size': 'large'}</div>
+            </div>
+            
+            <!-- Removing -->
+            <div class="section">
+                <h2>4. Removing Items</h2>
+                
+                <div class="code-block">
+<span class="code-label">Python</span>person = {'name': 'Alice', 'age': 30, 'city': 'NYC'}
+
+# Delete by key
+del person['city']
+
+# Pop (remove and return value)
+age = person.pop('age')        # Returns 30, removes it
+job = person.pop('job', None)  # Returns None if missing (safe)
+
+# Remove and return arbitrary item (Python 3.7+ = last inserted)
+item = person.popitem()  # ('name', 'Alice')
+
+# Clear all items
+person.clear()  # {}</div>
+            </div>
+            
+            <!-- Iterating -->
+            <div class="section">
+                <h2>5. Iterating Through Dictionaries</h2>
+                
+                <div class="code-block">
+<span class="code-label">Python</span>person = {'name': 'Alice', 'age': 30, 'city': 'NYC'}
+
+# Iterate over keys (default)
+for key in person:
+    print(key)  # 'name', 'age', 'city'
+
+# Iterate over keys (explicit)
+for key in person.keys():
+    print(key)
+
+# Iterate over values
+for value in person.values():
+    print(value)  # 'Alice', 30, 'NYC'
+
+# Iterate over both (MOST COMMON)
+for key, value in person.items():
+    print(f"{key}: {value}")
+    # name: Alice
+    # age: 30
+    # city: NYC</div>
+
+                <div class="tip">
+                    <strong>Pro Tip:</strong> As of Python 3.7+, dictionaries maintain insertion order!
+                </div>
+            </div>
+            
+            <!-- Checking -->
+            <div class="section">
+                <h2>6. Checking Membership</h2>
+                
+                <div class="code-block">
+<span class="code-label">Python</span>person = {'name': 'Alice', 'age': 30}
+
+# Check if key exists
+if 'name' in person:
+    print("Name exists!")
+
+if 'city' not in person:
+    print("No city!")
+
+# Check value (slower - loops through all values)
+if 'Alice' in person.values():
+    print("Alice is a value")
+
+# Get with existence check
+if 'age' in person:
+    age = person['age']
+# Or simpler:
+age = person.get('age')  # Returns None if missing</div>
+            </div>
+            
+            <!-- Common Methods -->
+            <div class="section">
+                <h2>7. Essential Methods Cheat Sheet</h2>
+                
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>What It Does</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><code>.get(key, default)</code></td>
+                        <td>Safe access with default</td>
+                        <td><code>d.get('x', 0)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.setdefault(key, default)</code></td>
+                        <td>Get or set if missing</td>
+                        <td><code>d.setdefault('count', 0)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.update(other)</code></td>
+                        <td>Merge another dict</td>
+                        <td><code>d.update({'x': 1})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.pop(key, default)</code></td>
+                        <td>Remove and return</td>
+                        <td><code>val = d.pop('x', None)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.popitem()</code></td>
+                        <td>Remove last item</td>
+                        <td><code>k, v = d.popitem()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.keys()</code></td>
+                        <td>View of all keys</td>
+                        <td><code>for k in d.keys()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.values()</code></td>
+                        <td>View of all values</td>
+                        <td><code>for v in d.values()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.items()</code></td>
+                        <td>View of (key, value) pairs</td>
+                        <td><code>for k, v in d.items()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.clear()</code></td>
+                        <td>Remove all items</td>
+                        <td><code>d.clear()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>.copy()</code></td>
+                        <td>Shallow copy</td>
+                        <td><code>new = d.copy()</code></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Common Patterns -->
+            <div class="section">
+                <h2>8. Common Patterns</h2>
+                
+                <h3>Counting Occurrences</h3>
+                <div class="comparison">
+                    <div>
+                        <div class="code-block">
+<span class="code-label">Manual</span>word_count = {}
+for word in words:
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1</div>
+                    </div>
+                    <div>
+                        <div class="code-block">
+<span class="code-label">Better</span>word_count = {}
+for word in words:
+    word_count[word] = word_count.get(word, 0) + 1</div>
+                    </div>
+                </div>
+                
+                <div class="success">
+                    <strong>Even Better:</strong> Use <code>Counter</code> from collections!
+                </div>
+                <div class="code-block">
+<span class="code-label">Best</span>from collections import Counter
+word_count = Counter(words)
+word_count.most_common(3)  # Top 3 most common</div>
+                
+                <h3>Grouping Items</h3>
+                <div class="code-block">
+<span class="code-label">Python</span>from collections import defaultdict
+
+# Group people by age
+people = [
+    {'name': 'Alice', 'age': 30},
+    {'name': 'Bob', 'age': 25},
+    {'name': 'Charlie', 'age': 30}
+]
+
+by_age = defaultdict(list)
+for person in people:
+    by_age[person['age']].append(person['name'])
+
+# {30: ['Alice', 'Charlie'], 25: ['Bob']}</div>
+                
+                <h3>Inverting a Dictionary</h3>
+                <div class="code-block">
+<span class="code-label">Python</span>original = {'a': 1, 'b': 2, 'c': 3}
+
+# Swap keys and values
+inverted = {v: k for k, v in original.items()}
+# {1: 'a', 2: 'b', 3: 'c'}</div>
+                
+                <h3>Filtering a Dictionary</h3>
+                <div class="code-block">
+<span class="code-label">Python</span>scores = {'Alice': 85, 'Bob': 92, 'Charlie': 78}
+
+# Keep only scores >= 80
+passing = {k: v for k, v in scores.items() if v >= 80}
+# {'Alice': 85, 'Bob': 92}</div>
+                
+                <h3>Default Values Pattern</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Instead of checking existence
+if 'count' not in stats:
+    stats['count'] = 0
+stats['count'] += 1
+
+# Use setdefault
+stats.setdefault('count', 0)
+stats['count'] += 1</div>
+            </div>
+            
+            <!-- Dictionary Comprehensions -->
+            <div class="section">
+                <h2>9. Dictionary Comprehensions</h2>
+                
+                <p>Dictionary comprehensions are a powerful way to create dictionaries in a single line.</p>
+                
+                <h3>Basic Syntax</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Syntax: {key_expression: value_expression for item in iterable}
+
+# Create squares dictionary
+squares = {x: x**2 for x in range(6)}
+# {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# From a list
+fruits = ['apple', 'banana', 'cherry']
+fruit_lengths = {fruit: len(fruit) for fruit in fruits}
+# {'apple': 5, 'banana': 6, 'cherry': 6}</div>
+
+                <h3>With Conditions (Filtering)</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Only even numbers
+evens = {x: x**2 for x in range(10) if x % 2 == 0}
+# {0: 0, 2: 4, 4: 16, 6: 36, 8: 64}
+
+# Filter dictionary by value
+scores = {'Alice': 85, 'Bob': 92, 'Charlie': 78, 'Diana': 95}
+high_scores = {name: score for name, score in scores.items() if score >= 90}
+# {'Bob': 92, 'Diana': 95}
+
+# Filter by key
+starts_with_a = {k: v for k, v in scores.items() if k.startswith('A')}
+# {'Alice': 85}</div>
+
+                <h3>Transform Keys or Values</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Uppercase all keys
+original = {'name': 'Alice', 'age': 30}
+upper_keys = {k.upper(): v for k, v in original.items()}
+# {'NAME': 'Alice', 'AGE': 30}
+
+# Double all values
+numbers = {'a': 1, 'b': 2, 'c': 3}
+doubled = {k: v * 2 for k, v in numbers.items()}
+# {'a': 2, 'b': 4, 'c': 6}
+
+# Transform both
+prices = {'apple': 1.5, 'banana': 0.8}
+formatted = {k.upper(): f"${v:.2f}" for k, v in prices.items()}
+# {'APPLE': '$1.50', 'BANANA': '$0.80'}</div>
+
+                <h3>From Two Lists (zip)</h3>
+                <div class="code-block">
+<span class="code-label">Python</span>names = ['Alice', 'Bob', 'Charlie']
+ages = [30, 25, 35]
+
+# Create dictionary from two lists
+people = {name: age for name, age in zip(names, ages)}
+# {'Alice': 30, 'Bob': 25, 'Charlie': 35}
+
+# With index
+indexed = {i: name for i, name in enumerate(names)}
+# {0: 'Alice', 1: 'Bob', 2: 'Charlie'}</div>
+
+                <h3>Nested Comprehensions</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Create nested dictionary
+matrix = {i: {j: i*j for j in range(3)} for i in range(3)}
+# {0: {0: 0, 1: 0, 2: 0},
+#  1: {0: 0, 1: 1, 2: 2},
+#  2: {0: 0, 1: 2, 2: 4}}
+
+# Flatten nested dict
+nested = {'a': {'x': 1, 'y': 2}, 'b': {'x': 3, 'y': 4}}
+flattened = {f"{k}_{sub_k}": v 
+             for k, sub_dict in nested.items() 
+             for sub_k, v in sub_dict.items()}
+# {'a_x': 1, 'a_y': 2, 'b_x': 3, 'b_y': 4}</div>
+
+                <h3>Swap Keys and Values</h3>
+                <div class="code-block">
+<span class="code-label">Python</span>original = {'a': 1, 'b': 2, 'c': 3}
+
+# Invert dictionary
+inverted = {v: k for k, v in original.items()}
+# {1: 'a', 2: 'b', 3: 'c'}
+
+# Warning: If values aren't unique, last one wins!
+dups = {'a': 1, 'b': 1, 'c': 2}
+inverted = {v: k for k, v in dups.items()}
+# {1: 'b', 2: 'c'}  # 'a' was overwritten by 'b'</div>
+
+                <h3>Conditional Values</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Different value based on condition
+numbers = range(1, 6)
+parity = {x: 'even' if x % 2 == 0 else 'odd' for x in numbers}
+# {1: 'odd', 2: 'even', 3: 'odd', 4: 'even', 5: 'odd'}
+
+# Grade assignment
+scores = {'Alice': 85, 'Bob': 92, 'Charlie': 78}
+grades = {name: 'A' if score >= 90 else 'B' if score >= 80 else 'C' 
+          for name, score in scores.items()}
+# {'Alice': 'B', 'Bob': 'A', 'Charlie': 'C'}</div>
+
+                <h3>Real-World Examples</h3>
+                <div class="code-block">
+<span class="code-label">Python</span># Count character frequency
+text = "hello world"
+char_count = {char: text.count(char) for char in set(text)}
+
+# Create lookup table
+products = [
+    {'id': 1, 'name': 'Apple', 'price': 1.5},
+    {'id': 2, 'name': 'Banana', 'price': 0.8}
+]
+product_lookup = {p['id']: p for p in products}
+# {1: {'id': 1, 'name': 'Apple', 'price': 1.5}, ...}
+
+# Parse query string
+query = "name=Alice&age=30&city=NYC"
+params = {k: v for k, v in (pair.split('=') for pair in query.split('&'))}
+# {'name': 'Alice', 'age': '30', 'city': 'NYC'}</div>
+
+                <div class="tip">
+                    <strong>When to Use:</strong> Dictionary comprehensions are great for transforming or filtering existing data. If your logic gets too complex, use a regular loop for readability!
+                </div>
+            </div>
+            
+            <!-- Nested Dictionaries -->
+            <div class="section">
+                <h2>10. Nested Dictionaries</h2>
+                
+                <div class="code-block">
+<span class="code-label">Python</span># Dictionary of dictionaries
+users = {
+    'alice': {
+        'age': 30,
+        'email': '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50313c393335103528313d203c357e333f3d">[email&#160;protected]</a>',
+        'active': True
+    },
+    'bob': {
+        'age': 25,
+        'email': '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed8f828fad88958c809d8188c38e8280">[email&#160;protected]</a>',
+        'active': False
+    }
+}
+
+# Accessing nested values
+alice_age = users['alice']['age']  # 30
+
+# Safe nested access
+bob_phone = users.get('bob', {}).get('phone', 'N/A')  # 'N/A'
+
+# Iterating nested dicts
+for username, info in users.items():
+    print(f"{username}: {info['email']}")</div>
+            </div>
+            
+            <!-- Practice Exercises -->
+            <div class="section">
+                <h2>11. Quick Practice Challenges</h2>
+                
+                <div class="practice">
+                    <h4>Challenge 1: Word Counter</h4>
+                    <p>Count how many times each word appears in a sentence.</p>
+                    <div class="code-block">
+<span class="code-label">Python</span>sentence = "the quick brown fox jumps over the lazy dog"
+# Expected: {'the': 2, 'quick': 1, 'brown': 1, ...}</div>
+                </div>
+                
+                <div class="practice">
+                    <h4>Challenge 2: Phone Book</h4>
+                    <p>Create a phone book that can add contacts, look them up, and list all.</p>
+                    <div class="code-block">
+<span class="code-label">Python</span>phonebook = {}
+# Add: phonebook['Alice'] = '555-1234'
+# Lookup: phonebook.get('Alice', 'Not found')
+# List all: for name, number in phonebook.items()</div>
+                </div>
+                
+                <div class="practice">
+                    <h4>Challenge 3: Grade Calculator</h4>
+                    <p>Given scores, calculate average per student.</p>
+                    <div class="code-block">
+<span class="code-label">Python</span>scores = {
+    'Alice': [85, 90, 92],
+    'Bob': [78, 82, 88]
+}
+# Calculate: {name: sum(grades)/len(grades) for name, grades in scores.items()}</div>
+                </div>
+            </div>
+            
+            <!-- Common Mistakes -->
+            <div class="section">
+                <h2>12. Common Mistakes to Avoid</h2>
+                
+                <h3>❌ Using Mutable Keys</h3>
+                <div class="code-block">
+<span class="code-label">Wrong</span>my_dict = {[1, 2]: 'value'}  # ❌ Lists can't be keys!
+my_dict = {{1: 2}: 'value'}  # ❌ Dicts can't be keys!</div>
+                
+                <div class="code-block">
+<span class="code-label">Correct</span>my_dict = {(1, 2): 'value'}  # ✅ Tuples work!
+my_dict = {'1,2': 'value'}    # ✅ Strings work!</div>
+                
+                <h3>❌ Modifying During Iteration</h3>
+                <div class="code-block">
+<span class="code-label">Wrong</span>for key in my_dict:
+    if condition:
+        del my_dict[key]  # ❌ RuntimeError!</div>
+                
+                <div class="code-block">
+<span class="code-label">Correct</span># Iterate over a copy
+for key in list(my_dict.keys()):
+    if condition:
+        del my_dict[key]
+
+# Or use dict comprehension
+my_dict = {k: v for k, v in my_dict.items() if not condition}</div>
+                
+                <h3>❌ Expecting KeyError to Be Silent</h3>
+                <div class="code-block">
+<span class="code-label">Wrong</span>value = my_dict['missing_key']  # ❌ Crashes!</div>
+                
+                <div class="code-block">
+<span class="code-label">Correct</span>value = my_dict.get('missing_key')  # ✅ Returns None
+value = my_dict.get('missing_key', 'default')  # ✅ Returns 'default'</div>
+            </div>
+            
+            <!-- Quick Reference -->
+            <div class="section">
+                <h2>13. One-Page Quick Reference</h2>
+                
+                <div class="code-block">
+<span class="code-label">Cheat Sheet</span># CREATE
+d = {}
+d = {'key': 'value'}
+d = dict(key='value')
+d = {k: v for k, v in pairs}
+
+# ACCESS
+d['key']              # Raises KeyError if missing
+d.get('key')          # Returns None if missing
+d.get('key', default) # Returns default if missing
+
+# ADD/MODIFY
+d['key'] = value
+d.setdefault('key', default)
+d.update({'k': 'v'})
+d.update(k='v')
+
+# REMOVE
+del d['key']
+value = d.pop('key')
+value = d.pop('key', default)
+d.clear()
+
+# CHECK
+'key' in d
+'key' not in d
+
+# ITERATE
+for key in d:
+for key in d.keys():
+for value in d.values():
+for key, value in d.items():
+
+# COPY
+new = d.copy()
+
+# MERGE (Python 3.9+)
+merged = d1 | d2
+
+# LENGTH
+len(d)
+
+# ALL KEYS/VALUES/ITEMS
+list(d.keys())
+list(d.values())
+list(d.items())</div>
+            </div>
+            
+            <!-- Summary -->
+            <div class="section">
+                <h2>Key Takeaways</h2>
+                
+                <div class="success">
+                    <strong>Remember These:</strong>
+                    <ul>
+                        <li>Use <code>.get()</code> for safe access when keys might not exist</li>
+                        <li>Use <code>.items()</code> to iterate through both keys and values</li>
+                        <li>Dictionary comprehensions are powerful and fast</li>
+                        <li>Keys must be immutable (strings, numbers, tuples)</li>
+                        <li>Since Python 3.7+, dicts preserve insertion order</li>
+                        <li>Use <code>defaultdict</code> or <code>Counter</code> from collections for advanced patterns</li>
+                    </ul>
+                </div>
+                
+                <div class="tip">
+   
