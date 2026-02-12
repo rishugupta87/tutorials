@@ -1,0 +1,12 @@
+---
+---
+
+@import "minima";
+
+.page-content {
+  padding-top: 24px;
+}
+
+.wrapper {
+  max-width: 900px;
+}

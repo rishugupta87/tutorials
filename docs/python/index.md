@@ -1,6 +1,8 @@
-# 🐍 Python
+Welcome! This is my structured learning hub for **Python** and **AI Agents**.
 
-## Concepts
-- [Dictionary](./dictionary.html)
-- [Lists](./lists.html)
-- [Sets](./sets.html)
+## 📚 Sections
+- [Python](./python/)
+- [AI Agents](./ai-agents/)
+
+## ✅ Current Notes
+- [Python: Dictionary Crash Course](./python/dictionary-crash-course/)
